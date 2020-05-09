@@ -7,19 +7,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. square root of -4: {sqrt(-4).toString()}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>The top of the page</p>
       </header>
+        <p>
+          square root of -4: {sqrt(-4).toString()}
+        </p>
+
+      <img src={logo} className="App-logo" alt="logo" />
     </div>
   );
 }

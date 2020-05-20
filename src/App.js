@@ -14,8 +14,8 @@ function App() {
             <Link className="header-link" to="/">
               Home
             </Link>
-            <Link className="header-link" to="/sqrt4">
-              sqrt4
+            <Link className="header-link" to="/sqrt6">
+              sqrt6
             </Link>
             <Link className="header-link" to="/sqrt8">
               sqrt8
@@ -23,8 +23,8 @@ function App() {
           </header>
 
           <Switch>
-            <Route path="/sqrt4">
-              <SqrtExample number={4} />
+            <Route path="/sqrt6">
+              <SqrtExample number={6} />
             </Route>
             <Route path="/sqrt8">
               <SqrtExample number={8} />

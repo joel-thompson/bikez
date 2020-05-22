@@ -1,11 +1,46 @@
-import React from 'react';
-import logo from './assets/images/logo.svg';
+import React, { useState, useLayoutEffect } from "react";
 import './assets/styles/App.css';
 import SqrtExample from './components/SqrtExample'
 import Home from "./components/Home";
+import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
 
 function App() {
+  const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN")
+  const [user, setUser] = useState({})
+
+
+
+  function handleLogin(data) {
+    setLoggedInStatus("LOGGED_IN")
+    setUser(data.user)
+  }
+
+  function handleLogout() {
+    setLoggedInStatus("NOT_LOGGED_IN")
+    setUser({})
+  }
+
+  useLayoutEffect(() => {
+
+    async function checkLoginStatus() {
+      await axios.get("http://localhost:2000/logged_in", { withCredentials: true }).then(response => {
+        if (response.data.logged_in && loggedInStatus === "NOT_LOGGED_IN") {
+          setLoggedInStatus("LOGGED_IN")
+          setUser(response.data.user)
+        } else if (!response.data.logged_in && loggedInStatus === "LOGGED_IN") {
+          setLoggedInStatus("NOT_LOGGED_IN")
+          setUser({})
+        }
+      }).catch(error => {
+        console.log("check login error", error)
+      })
+    }
+
+    checkLoginStatus();
+  }, [loggedInStatus])
+
   return (
     <div className="App">
       <Router>
@@ -23,14 +58,28 @@ function App() {
           </header>
 
           <Switch>
-            <Route path="/sqrt6">
+            <Route 
+              exact 
+              path = "/"
+              render={props => (
+                <Home {...props} handleLogin={handleLogin} handleLogout={handleLogout} loggedInStatus={loggedInStatus} />
+              )}
+            />
+
+            <Route 
+              exact 
+              path = "/dashboard"
+              render={props => (
+                <Dashboard {...props} loggedInStatus={loggedInStatus} />
+              )}
+            />
+
+
+            <Route exact path="/sqrt6">
               <SqrtExample number={6} />
             </Route>
-            <Route path="/sqrt8">
+            <Route exact path="/sqrt8">
               <SqrtExample number={8} />
-            </Route>
-            <Route path="/">
-              <Home />
             </Route>
           </Switch>
         </div>

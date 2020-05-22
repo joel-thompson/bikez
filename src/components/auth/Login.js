@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import apiUrl from "../../lib/apiUrl"
 
 function Login(props) {
   const [email, setEmail] = useState("")
@@ -8,7 +9,7 @@ function Login(props) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    axios.post("http://localhost:2000/sessions", {
+    axios.post(apiUrl("sessions"), {
       user: {
         email: email,
         password: password,

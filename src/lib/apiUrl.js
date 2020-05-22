@@ -4,7 +4,7 @@ function apiUrl(url) {
     baseUrl = "http://localhost:2000"
   }
   else {
-    baseUrl = "https://bikez-api.herokuapp.com"
+    baseUrl = "https://api.bikenumbers.dev/"
   }
   return `${baseUrl}/${url}`
 }

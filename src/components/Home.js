@@ -2,6 +2,7 @@ import React from "react";
 import Registration from "./auth/Registration";
 import Login from "./auth/Login";
 import axios from "axios";
+import apiUrl from "../lib/apiUrl"
 
 function Home(props) {
 
@@ -11,7 +12,7 @@ function Home(props) {
   }
 
   function handleLogoutClick() {
-    axios.delete("http://localhost:2000/logout", { withCredentials: true }).then(response => {
+    axios.delete(apiUrl("logout"), { withCredentials: true }).then(_response => {
       props.handleLogout()
     }).catch(error => {
       console.log("logout error", error)

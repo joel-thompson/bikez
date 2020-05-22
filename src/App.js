@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
+import apiUrl from "./lib/apiUrl"
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN")
@@ -24,8 +25,8 @@ function App() {
 
   useLayoutEffect(() => {
 
-    async function checkLoginStatus() {
-      await axios.get("http://localhost:2000/logged_in", { withCredentials: true }).then(response => {
+    function checkLoginStatus() {
+      axios.get(apiUrl("logged_in"), { withCredentials: true }).then(response => {
         if (response.data.logged_in && loggedInStatus === "NOT_LOGGED_IN") {
           handleLogin(response.data)
         } else if (!response.data.logged_in && loggedInStatus === "LOGGED_IN") {

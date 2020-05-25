@@ -2,22 +2,30 @@ import React from 'react';
 import Registration from './auth/Registration';
 import Login from './auth/Login';
 import LogoutButton from './auth/LogoutButton';
+import authContext from '../lib/authContext';
 
 function Home(props) {
-  function handleSuccessfulAuth(data) {
-    props.handleLogin(data);
-    props.history.push('/dashboard');
-  }
-
   return (
     <div className="Home">
       <h1>Home</h1>
-      <h1>Status: {props.loggedInStatus}</h1>
+      <authContext.Consumer>
+        {({ loggedInStatus }) => {
+          return <h1>Status: {loggedInStatus}</h1>;
+        }}
+      </authContext.Consumer>
       <LogoutButton />
       <hr />
-      <Registration handleSuccessfulAuth={handleSuccessfulAuth} />
+      <Registration
+        onSuccessfulAuth={() => {
+          props.history.push('/dashboard');
+        }}
+      />
       <hr />
-      <Login handleSuccessfulAuth={handleSuccessfulAuth} />
+      <Login
+        onSuccessfulLogin={() => {
+          props.history.push('/dashboard');
+        }}
+      />
     </div>
   );
 }

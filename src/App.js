@@ -14,25 +14,18 @@ import apiUrl from './lib/apiUrl';
 import authContext from './lib/authContext';
 
 function App() {
-  const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN'); // make global
-  const [user, setUser] = useState({}); // make global
+  const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');
+  const [user, setUser] = useState({});
 
-  function handleLogin(data) {
+  function handleLogin(user) {
     setLoggedInStatus('LOGGED_IN');
-    setUser(data.user);
+    setUser(user);
   }
 
   function handleLogout() {
     setLoggedInStatus('NOT_LOGGED_IN');
     setUser({});
   }
-
-  const authContextValue = {
-    user: user,
-    loggedInStatus: loggedInStatus,
-    handleLogin: handleLogin,
-    handleLogout: handleLogout,
-  };
 
   useLayoutEffect(() => {
     axios
@@ -42,7 +35,7 @@ function App() {
           response.data.logged_in &&
           loggedInStatus !== 'LOGGED_IN'
         ) {
-          handleLogin(response.data);
+          handleLogin(response.data.user);
         } else if (
           !response.data.logged_in &&
           loggedInStatus !== 'NOT_LOGGED_IN'
@@ -64,7 +57,9 @@ function App() {
   }
 
   return (
-    <authContext.Provider value={authContextValue}>
+    <authContext.Provider
+      value={{ user, loggedInStatus, handleLogin, handleLogout }}
+    >
       <div className="App">
         <Router>
           <div>
@@ -84,26 +79,10 @@ function App() {
               <Route
                 exact
                 path="/"
-                render={(props) => (
-                  <Home
-                    {...props}
-                    handleLogin={handleLogin}
-                    handleLogout={handleLogout}
-                    loggedInStatus={loggedInStatus}
-                  />
-                )}
+                render={(props) => <Home {...props} />}
               />
 
-              <Route
-                exact
-                path="/dashboard"
-                render={(props) => (
-                  <Dashboard
-                    {...props}
-                    loggedInStatus={loggedInStatus}
-                  />
-                )}
-              />
+              <Route exact path="/dashboard" component={Dashboard} />
 
               <Route exact path="/sqrt6">
                 <SqrtExample number={6} />

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../../lib/apiUrl';
 import authContext from '../../lib/authContext';
+import { Redirect } from 'react-router-dom';
 
 function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginErrors, setLoginErrors] = useState(null);
+  const [redirectPath, setRedirectPath] = useState(null);
 
   return (
     <authContext.Consumer>
@@ -27,9 +29,7 @@ function Login(props) {
             .then((response) => {
               if (response.data.logged_in) {
                 handleLogin(response.data.user);
-                if (typeof props.onSuccessfulLogin === 'function') {
-                  props.onSuccessfulLogin();
-                }
+                setRedirectPath(props.redirectPath);
               } else {
                 setLoginErrors('Unable to login');
               }
@@ -38,6 +38,10 @@ function Login(props) {
             .catch((error) => {
               console.log('login error', error);
             });
+        }
+
+        if (redirectPath) {
+          return <Redirect to={redirectPath} />;
         }
 
         return (

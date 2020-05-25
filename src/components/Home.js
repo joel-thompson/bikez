@@ -4,7 +4,7 @@ import Login from './auth/Login';
 import LogoutButton from './auth/LogoutButton';
 import authContext from '../lib/authContext';
 
-function Home(props) {
+function Home() {
   return (
     <div className="Home">
       <h1>Home</h1>
@@ -15,17 +15,9 @@ function Home(props) {
       </authContext.Consumer>
       <LogoutButton />
       <hr />
-      <Registration
-        onSuccessfulAuth={() => {
-          props.history.push('/dashboard');
-        }}
-      />
+      <Registration redirectPath="/dashboard" />
       <hr />
-      <Login
-        onSuccessfulLogin={() => {
-          props.history.push('/dashboard');
-        }}
-      />
+      <Login redirectPath="/dashboard" />
     </div>
   );
 }

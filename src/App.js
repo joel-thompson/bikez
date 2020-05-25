@@ -76,11 +76,7 @@ function App() {
             </header>
 
             <Switch>
-              <Route
-                exact
-                path="/"
-                render={(props) => <Home {...props} />}
-              />
+              <Route exact path="/" component={Home} />
 
               <Route exact path="/dashboard" component={Dashboard} />
 

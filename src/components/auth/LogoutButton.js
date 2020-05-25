@@ -6,7 +6,7 @@ import authContext from '../../lib/authContext';
 function LogoutButton(props) {
   return (
     <authContext.Consumer>
-      {({ handleLogout }) => {
+      {({ loggedInStatus, handleLogout }) => {
         function handleLogoutClick() {
           axios
             .delete(apiUrl('logout'), { withCredentials: true })
@@ -20,6 +20,7 @@ function LogoutButton(props) {
 
         return (
           <button
+            disabled={loggedInStatus === 'NOT_LOGGED_IN'}
             className="LogoutButton"
             onClick={handleLogoutClick}
           >

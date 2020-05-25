@@ -11,14 +11,15 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from './lib/apiUrl';
+import authContext from './lib/authContext';
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');
   const [user, setUser] = useState({});
 
-  function handleLogin(data) {
+  function handleLogin(user) {
     setLoggedInStatus('LOGGED_IN');
-    setUser(data.user);
+    setUser(user);
   }
 
   function handleLogout() {
@@ -34,7 +35,7 @@ function App() {
           response.data.logged_in &&
           loggedInStatus !== 'LOGGED_IN'
         ) {
-          handleLogin(response.data);
+          handleLogin(response.data.user);
         } else if (
           !response.data.logged_in &&
           loggedInStatus !== 'NOT_LOGGED_IN'
@@ -56,56 +57,40 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Router>
-        <div>
-          <header className="App-header">
-            <Link className="header-link" to="/">
-              Home
-            </Link>
-            <Link className="header-link" to="/sqrt6">
-              sqrt6
-            </Link>
-            <Link className="header-link" to="/sqrt8">
-              sqrt8
-            </Link>
-          </header>
+    <authContext.Provider
+      value={{ user, loggedInStatus, handleLogin, handleLogout }}
+    >
+      <div className="App">
+        <Router>
+          <div>
+            <header className="App-header">
+              <Link className="header-link" to="/">
+                Home
+              </Link>
+              <Link className="header-link" to="/sqrt6">
+                sqrt6
+              </Link>
+              <Link className="header-link" to="/sqrt8">
+                sqrt8
+              </Link>
+            </header>
 
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <Home
-                  {...props}
-                  handleLogin={handleLogin}
-                  handleLogout={handleLogout}
-                  loggedInStatus={loggedInStatus}
-                />
-              )}
-            />
+            <Switch>
+              <Route exact path="/" component={Home} />
 
-            <Route
-              exact
-              path="/dashboard"
-              render={(props) => (
-                <Dashboard
-                  {...props}
-                  loggedInStatus={loggedInStatus}
-                />
-              )}
-            />
+              <Route exact path="/dashboard" component={Dashboard} />
 
-            <Route exact path="/sqrt6">
-              <SqrtExample number={6} />
-            </Route>
-            <Route exact path="/sqrt8">
-              <SqrtExample number={8} />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </div>
+              <Route exact path="/sqrt6">
+                <SqrtExample number={6} />
+              </Route>
+              <Route exact path="/sqrt8">
+                <SqrtExample number={8} />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    </authContext.Provider>
   );
 }
 

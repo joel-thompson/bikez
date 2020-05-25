@@ -1,35 +1,23 @@
 import React from 'react';
 import Registration from './auth/Registration';
 import Login from './auth/Login';
-import axios from 'axios';
-import apiUrl from '../lib/apiUrl';
+import LogoutButton from './auth/LogoutButton';
+import authContext from '../lib/authContext';
 
-function Home(props) {
-  function handleSuccessfulAuth(data) {
-    props.handleLogin(data);
-    props.history.push('/dashboard');
-  }
-
-  function handleLogoutClick() {
-    axios
-      .delete(apiUrl('logout'), { withCredentials: true })
-      .then((_response) => {
-        props.handleLogout();
-      })
-      .catch((error) => {
-        console.log('logout error', error);
-      });
-  }
-
+function Home() {
   return (
     <div className="Home">
       <h1>Home</h1>
-      <h1>Status: {props.loggedInStatus}</h1>
-      <button onClick={handleLogoutClick}>Logout</button>
+      <authContext.Consumer>
+        {({ loggedInStatus }) => {
+          return <h1>Status: {loggedInStatus}</h1>;
+        }}
+      </authContext.Consumer>
+      <LogoutButton />
       <hr />
-      <Registration handleSuccessfulAuth={handleSuccessfulAuth} />
+      <Registration redirectPath="/dashboard" />
       <hr />
-      <Login handleSuccessfulAuth={handleSuccessfulAuth} />
+      <Login redirectPath="/dashboard" />
     </div>
   );
 }

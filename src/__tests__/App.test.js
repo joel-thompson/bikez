@@ -1,9 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { render, act } from '@testing-library/react';
+import App from '../App';
+import axios from 'axios';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+jest.mock('axios');
+
+test('renders the app component', async () => {
+  let promise = Promise.resolve({
+    data: { logged_in: true, user: {} },
+  });
+  axios.get.mockResolvedValue(promise);
+
+  const { container, getByText } = render(<App />);
+
+  expect(getByText('Loading...')).toBeInTheDocument();
+  expect(container.firstChild).toHaveClass('Loading');
+  await act(() => promise);
+  expect(container.firstChild).toHaveClass('App');
 });

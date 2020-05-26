@@ -12,6 +12,7 @@ import {
 import axios from 'axios';
 import apiUrl from './lib/apiUrl';
 import authContext from './lib/authContext';
+import Loading from './components/Loading';
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');
@@ -53,7 +54,7 @@ function App() {
   }
 
   if (appNotReady()) {
-    return null;
+    return <Loading />;
   }
 
   return (

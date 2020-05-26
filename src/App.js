@@ -13,6 +13,7 @@ import axios from 'axios';
 import apiUrl from './lib/apiUrl';
 import authContext from './lib/authContext';
 import Loading from './components/Loading';
+import Posts from './components/Posts';
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');
@@ -80,6 +81,7 @@ function App() {
               <Route exact path="/" component={Home} />
 
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/posts" component={Posts} />
 
               <Route exact path="/sqrt6">
                 <SqrtExample number={6} />

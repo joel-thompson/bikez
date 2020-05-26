@@ -1,4 +1,12 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/304f9eb0-5666-4a09-85f8-d1d0dcb297ea/deploy-status)](https://app.netlify.com/sites/jtbikez/deploys)
+# README
+
+## Info
+
+Frontend react app, hosted on heroku. Can be found here: https://bikenumbers.dev/
+
+Backend API here: https://github.com/joel-thompson/bikez-api
+
+--------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

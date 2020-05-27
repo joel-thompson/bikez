@@ -7,13 +7,15 @@ import authContext from '../lib/authContext';
 function Home() {
   return (
     <div className="Home">
-      <h1>Home</h1>
-      <authContext.Consumer>
-        {({ loggedInStatus }) => {
-          return <h1>Status: {loggedInStatus}</h1>;
-        }}
-      </authContext.Consumer>
-      <LogoutButton />
+      <div className="centered">
+        <h1>Home</h1>
+        <authContext.Consumer>
+          {({ loggedInStatus }) => {
+            return <h1>Status: {loggedInStatus}</h1>;
+          }}
+        </authContext.Consumer>
+        <LogoutButton />
+      </div>
       <hr />
       <Registration redirectPath="/dashboard" />
       <hr />

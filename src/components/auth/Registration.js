@@ -12,12 +12,14 @@ function Registration(props) {
   );
   const [registrationErrors, setRegistrationErrors] = useState(null);
   const [redirectPath, setRedirectPath] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   return (
     <authContext.Consumer>
       {({ handleLogin }) => {
         function handleSubmit(event) {
           event.preventDefault();
+          setLoading(true);
           axios
             .post(
               apiUrl('registrations'),
@@ -33,6 +35,7 @@ function Registration(props) {
             .then((response) => {
               if (response.data.status === 'created') {
                 handleLogin(response.data.user);
+                setLoading(false);
                 setRedirectPath(props.redirectPath);
               } else {
                 setRegistrationErrors('Unable to register');
@@ -56,6 +59,7 @@ function Registration(props) {
             )}
             <form onSubmit={handleSubmit}>
               <input
+                className="input"
                 type="email"
                 placeholder="Email"
                 required
@@ -64,6 +68,7 @@ function Registration(props) {
               />
 
               <input
+                className="input"
                 type="password"
                 placeholder="Password"
                 required
@@ -72,6 +77,7 @@ function Registration(props) {
               />
 
               <input
+                className="input"
                 type="password"
                 placeholder="Password Confirmation"
                 required
@@ -81,7 +87,14 @@ function Registration(props) {
                 }
               />
 
-              <button type="submit">Register</button>
+              <button
+                className={`button is-link ${
+                  loading ? 'is-loading' : ''
+                }`}
+                type="submit"
+              >
+                Register
+              </button>
             </form>
           </div>
         );

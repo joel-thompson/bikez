@@ -1,0 +1,27 @@
+@charset "utf-8";
+@import './bulmaStyles.scss';
+
+.centered {
+  text-align: center;
+}
+
+.App-header {
+  background-color: $grey-darker;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: $white;
+}
+
+.header-link {
+  margin: 2vh;
+  background-color: $white;
+  text-decoration: none;
+}
+
+.header-link:hover {
+  color: $purple;
+}

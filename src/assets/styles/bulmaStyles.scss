@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+// more info here: https://bulma.io/documentation/customize/variables/
+
+// Set your brand colors
+$purple: #8a4d76;
+$pink: #fa7c91;
+$brown: #757763;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+
+// Update Bulma's global variables
+// all the main colors here, override when needed
+// $primary: $pink;
+// $link: $pink;
+// $info: $pink;
+// $success: $pink;
+// $warning: $pink;
+// $danger: $pink;
+
+@import '../../../node_modules/bulma/bulma.sass';
+
+// .test-class1 {
+//   // uses a color defined in bulma.sass
+//   color: $turquoise;
+// }
+
+// .test-class2 {
+//   // uses a color defined in this file
+//   color: $purple;
+// }

@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react';
-import './assets/styles/App.css';
+import './assets/styles/App.scss';
 import SqrtExample from './components/SqrtExample';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';

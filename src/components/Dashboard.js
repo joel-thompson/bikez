@@ -3,7 +3,7 @@ import authContext from '../lib/authContext';
 
 function Dashboard() {
   return (
-    <div className="Dashboard">
+    <div className="Dashboard centered">
       <h1>Dashboard</h1>
       <authContext.Consumer>
         {({ user, loggedInStatus }) => {

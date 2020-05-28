@@ -16,11 +16,13 @@ function TopNavBar() {
   }
 
   function loginClick() {
+    handleBurgerClick();
     setShowAuthModal(true);
     setisRegistrationModal(false);
   }
 
   function signUpClick() {
+    handleBurgerClick();
     setShowAuthModal(true);
     setisRegistrationModal(true);
   }

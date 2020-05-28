@@ -32,7 +32,6 @@ function Login(props) {
               if (response.data.logged_in) {
                 handleLogin(response.data.user);
                 setLoading(false);
-                debugger;
                 if (typeof props.onSubmit === 'function') {
                   props.onSubmit();
                 }

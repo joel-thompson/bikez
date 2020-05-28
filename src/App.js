@@ -14,6 +14,7 @@ import authContext from './lib/authContext';
 import Loading from './components/Loading';
 import Posts from './components/Posts';
 import TopNavBar from './components/TopNavBar';
+import LoggedInRoutes from './components/auth/LoggedInRoutes';
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');
@@ -69,15 +70,17 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
 
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/posts" component={Posts} />
-
             <Route exact path="/sqrt6">
               <SqrtExample number={6} />
             </Route>
             <Route exact path="/sqrt8">
               <SqrtExample number={8} />
             </Route>
+
+            <LoggedInRoutes>
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/posts" component={Posts} />
+            </LoggedInRoutes>
           </Switch>
         </Router>
       </div>

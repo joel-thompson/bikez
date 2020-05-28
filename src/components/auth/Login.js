@@ -32,9 +32,14 @@ function Login(props) {
               if (response.data.logged_in) {
                 handleLogin(response.data.user);
                 setLoading(false);
+                debugger;
+                if (typeof props.onSubmit === 'function') {
+                  props.onSubmit();
+                }
                 setRedirectPath(props.redirectPath);
               } else {
-                setLoginErrors('Unable to login');
+                setLoginErrors('Unable to login'); // todo - show errors
+                setLoading(false);
               }
               console.log('login response', response);
             })

@@ -7,9 +7,14 @@ function AuthModal(props) {
     const redirectPath = props.redirectPath || '/';
 
     if (props.registration) {
-      return <Registration redirectPath={redirectPath} />;
+      return (
+        <Registration
+          onSubmit={onClose}
+          redirectPath={redirectPath}
+        />
+      );
     } else {
-      return <Login redirectPath={redirectPath} />;
+      return <Login onSubmit={onClose} redirectPath={redirectPath} />;
     }
   }
 
@@ -38,6 +43,7 @@ function AuthModal(props) {
         <section className="modal-card-body">
           {loginOrRegistration()}
         </section>
+        <footer className="modal-card-foot"></footer>
       </div>
     </div>
   );

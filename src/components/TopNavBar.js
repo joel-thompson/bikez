@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthModal from './auth/AuthModal';
+import authContext from '../lib/authContext';
+import LogoutButton from './auth/LogoutButton';
 
 function TopNavBar() {
   const [burgerIsOpen, setBurgerIsOpen] = useState(false);
@@ -59,17 +61,34 @@ function TopNavBar() {
         >
           <div className="navbar-end">
             <div className="navbar-item">
-              <div className="buttons">
-                <div className="button is-link" onClick={signUpClick}>
-                  <strong>Sign up</strong>
-                </div>
-                <div
-                  className="button is-link is-light"
-                  onClick={loginClick}
-                >
-                  Log in
-                </div>
-              </div>
+              <authContext.Consumer>
+                {({ loggedInStatus }) => {
+                  if (loggedInStatus === 'LOGGED_IN') {
+                    return (
+                      <div className="buttons">
+                        <LogoutButton />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="buttons">
+                        <div
+                          className="button is-link"
+                          onClick={signUpClick}
+                        >
+                          <strong>Sign up</strong>
+                        </div>
+                        <div
+                          className="button is-link is-light"
+                          onClick={loginClick}
+                        >
+                          Log in
+                        </div>
+                      </div>
+                    );
+                  }
+                }}
+              </authContext.Consumer>
             </div>
           </div>
         </div>
@@ -79,6 +98,7 @@ function TopNavBar() {
         active={showAuthModal}
         registration={isRegistrationModal}
         onClose={closeModal}
+        redirectPath="/dashboard"
       />
     </div>
   );

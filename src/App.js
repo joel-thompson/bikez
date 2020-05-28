@@ -14,7 +14,6 @@ import authContext from './lib/authContext';
 import Loading from './components/Loading';
 import Posts from './components/Posts';
 import TopNavBar from './components/TopNavBar';
-import AuthModal from './components/auth/AuthModal';
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');

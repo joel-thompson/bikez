@@ -1,25 +1,22 @@
 import React from 'react';
-import Registration from './auth/Registration';
-import Login from './auth/Login';
-import LogoutButton from './auth/LogoutButton';
 import authContext from '../lib/authContext';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className="Home">
-      <div className="centered">
-        <h1>Home</h1>
-        <authContext.Consumer>
-          {({ loggedInStatus }) => {
-            return <h1>Status: {loggedInStatus}</h1>;
-          }}
-        </authContext.Consumer>
-        <LogoutButton />
-      </div>
-      <hr />
-      <Registration redirectPath="/dashboard" />
-      <hr />
-      <Login redirectPath="/dashboard" />
+    <div className="Home centered">
+      <h1>Home</h1>
+      <authContext.Consumer>
+        {({ loggedInStatus }) => {
+          if (loggedInStatus === 'LOGGED_IN') {
+            return (
+              <Link className="button is-link" to="/dashboard">
+                Go to Dashboard
+              </Link>
+            );
+          }
+        }}
+      </authContext.Consumer>
     </div>
   );
 }

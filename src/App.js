@@ -7,13 +7,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from 'react-router-dom';
 import axios from 'axios';
 import apiUrl from './lib/apiUrl';
 import authContext from './lib/authContext';
 import Loading from './components/Loading';
 import Posts from './components/Posts';
+import TopNavBar from './components/TopNavBar';
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState('UNKNOWN');
@@ -64,33 +64,21 @@ function App() {
     >
       <div className="App">
         <Router>
-          <div>
-            <header className="App-header">
-              <Link className="header-link" to="/">
-                Home
-              </Link>
-              <Link className="header-link" to="/sqrt6">
-                sqrt6
-              </Link>
-              <Link className="header-link" to="/sqrt8">
-                sqrt8
-              </Link>
-            </header>
+          <TopNavBar />
 
-            <Switch>
-              <Route exact path="/" component={Home} />
+          <Switch>
+            <Route exact path="/" component={Home} />
 
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/posts" component={Posts} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/posts" component={Posts} />
 
-              <Route exact path="/sqrt6">
-                <SqrtExample number={6} />
-              </Route>
-              <Route exact path="/sqrt8">
-                <SqrtExample number={8} />
-              </Route>
-            </Switch>
-          </div>
+            <Route exact path="/sqrt6">
+              <SqrtExample number={6} />
+            </Route>
+            <Route exact path="/sqrt8">
+              <SqrtExample number={8} />
+            </Route>
+          </Switch>
         </Router>
       </div>
     </authContext.Provider>

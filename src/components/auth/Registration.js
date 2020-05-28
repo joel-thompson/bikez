@@ -36,9 +36,13 @@ function Registration(props) {
               if (response.data.status === 'created') {
                 handleLogin(response.data.user);
                 setLoading(false);
+                if (typeof props.onSubmit === 'function') {
+                  props.onSubmit();
+                }
                 setRedirectPath(props.redirectPath);
               } else {
-                setRegistrationErrors('Unable to register');
+                setRegistrationErrors('Unable to register'); // todo - show errors
+                setLoading(false);
               }
             })
             .catch((error) => {

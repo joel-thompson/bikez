@@ -14,11 +14,11 @@ function LogoutButton({ onLogout }) {
           axios
             .delete(apiUrl('logout'), { withCredentials: true })
             .then((_response) => {
-              handleLogout();
               setLoading(false);
               if (typeof onLogout === 'function') {
                 onLogout();
               }
+              handleLogout(); // should be last to prevent state issues
             })
             .catch((error) => {
               console.log('logout error', error);

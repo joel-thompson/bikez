@@ -100,7 +100,6 @@ function TopNavBar() {
         active={showAuthModal}
         registration={isRegistrationModal}
         onClose={closeModal}
-        redirectPath="/dashboard"
       />
     </div>
   );

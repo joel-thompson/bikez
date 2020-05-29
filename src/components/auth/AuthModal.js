@@ -4,12 +4,17 @@ import Login from './Login';
 
 function AuthModal(props) {
   function loginOrRegistration() {
-    const redirectPath = props.redirectPath || '/';
-
     if (props.registration) {
-      return <Registration redirectPath={redirectPath} />;
+      return (
+        <Registration
+          onSubmit={onClose}
+          redirectPath={props.redirectPath}
+        />
+      );
     } else {
-      return <Login redirectPath={redirectPath} />;
+      return (
+        <Login onSubmit={onClose} redirectPath={props.redirectPath} />
+      );
     }
   }
 

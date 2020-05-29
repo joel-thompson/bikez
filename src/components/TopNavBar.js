@@ -68,7 +68,7 @@ function TopNavBar() {
                   if (loggedInStatus === 'LOGGED_IN') {
                     return (
                       <div className="buttons">
-                        <LogoutButton />
+                        <LogoutButton onLogout={handleBurgerClick} />
                       </div>
                     );
                   } else {
@@ -100,7 +100,6 @@ function TopNavBar() {
         active={showAuthModal}
         registration={isRegistrationModal}
         onClose={closeModal}
-        redirectPath="/dashboard"
       />
     </div>
   );

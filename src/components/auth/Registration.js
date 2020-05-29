@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import apiUrl from '../../lib/apiUrl';
 import authContext from '../../lib/authContext';
-import { Redirect } from 'react-router-dom';
 
 function Registration(props) {
   const [email, setEmail] = useState('');
@@ -11,8 +10,15 @@ function Registration(props) {
     '',
   );
   const [registrationErrors, setRegistrationErrors] = useState(null);
-  const [redirectPath, setRedirectPath] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  function reset() {
+    setEmail('');
+    setPassword('');
+    setPasswordConfirmation('');
+    setRegistrationErrors(null);
+    setLoading(false);
+  }
 
   return (
     <authContext.Consumer>
@@ -35,11 +41,13 @@ function Registration(props) {
             .then((response) => {
               if (response.data.status === 'created') {
                 handleLogin(response.data.user);
-                setLoading(false);
                 if (typeof props.onSubmit === 'function') {
                   props.onSubmit();
                 }
-                setRedirectPath(props.redirectPath);
+                reset();
+                if (props.redirectPath) {
+                  window.location.assign(props.redirectPath);
+                }
               } else {
                 setRegistrationErrors('Unable to register'); // todo - show errors
                 setLoading(false);
@@ -48,10 +56,6 @@ function Registration(props) {
             .catch((error) => {
               console.log('registration error', error);
             });
-        }
-
-        if (redirectPath) {
-          return <Redirect to={redirectPath} />;
         }
 
         return (

@@ -3,7 +3,7 @@ import axios from 'axios';
 import apiUrl from '../../lib/apiUrl';
 import authContext from '../../lib/authContext';
 
-function LogoutButton() {
+function LogoutButton({ onLogout }) {
   const [loading, setLoading] = useState(false);
 
   return (
@@ -16,6 +16,9 @@ function LogoutButton() {
             .then((_response) => {
               handleLogout();
               setLoading(false);
+              if (typeof onLogout === 'function') {
+                onLogout();
+              }
             })
             .catch((error) => {
               console.log('logout error', error);

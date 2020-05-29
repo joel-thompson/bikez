@@ -68,7 +68,7 @@ function TopNavBar() {
                   if (loggedInStatus === 'LOGGED_IN') {
                     return (
                       <div className="buttons">
-                        <LogoutButton />
+                        <LogoutButton onLogout={handleBurgerClick} />
                       </div>
                     );
                   } else {

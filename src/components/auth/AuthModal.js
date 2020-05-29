@@ -7,14 +7,9 @@ function AuthModal(props) {
     const redirectPath = props.redirectPath || '/';
 
     if (props.registration) {
-      return (
-        <Registration
-          onSubmit={onClose}
-          redirectPath={redirectPath}
-        />
-      );
+      return <Registration redirectPath={redirectPath} />;
     } else {
-      return <Login onSubmit={onClose} redirectPath={redirectPath} />;
+      return <Login redirectPath={redirectPath} />;
     }
   }
 

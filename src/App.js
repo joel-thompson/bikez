@@ -31,28 +31,24 @@ function App() {
   }
 
   useLayoutEffect(() => {
-    let mounted = true;
     axios
       .get(apiUrl('logged_in'), { withCredentials: true })
       .then((response) => {
-        if (mounted) {
-          if (
-            response.data.logged_in &&
-            loggedInStatus !== 'LOGGED_IN'
-          ) {
-            handleLogin(response.data.user);
-          } else if (
-            !response.data.logged_in &&
-            loggedInStatus !== 'NOT_LOGGED_IN'
-          ) {
-            handleLogout();
-          }
+        if (
+          response.data.logged_in &&
+          loggedInStatus !== 'LOGGED_IN'
+        ) {
+          handleLogin(response.data.user);
+        } else if (
+          !response.data.logged_in &&
+          loggedInStatus !== 'NOT_LOGGED_IN'
+        ) {
+          handleLogout();
         }
       })
       .catch((error) => {
         console.log('check login error', error);
       });
-    return () => (mounted = false);
   }, [loggedInStatus]);
 
   function appNotReady() {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className="Home centered">
+    <section className="Home section centered">
       <h1>Home</h1>
       <authContext.Consumer>
         {({ loggedInStatus }) => {
@@ -17,7 +17,7 @@ function Home() {
           }
         }}
       </authContext.Consumer>
-    </div>
+    </section>
   );
 }
 

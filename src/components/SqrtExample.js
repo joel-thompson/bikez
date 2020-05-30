@@ -5,11 +5,11 @@ function SqrtExample(props) {
   const number = props.number || 4;
 
   return (
-    <div className="SqrtExample">
+    <section className="SqrtExample section">
       <p>
         square root of {number}: {sqrt(number).toString()}
       </p>
-    </div>
+    </section>
   );
 }
 

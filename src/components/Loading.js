@@ -2,9 +2,9 @@ import React from 'react';
 
 function Loading() {
   return (
-    <div className="Loading">
+    <section className="Loading section">
       <h1>Loading...</h1>
-    </div>
+    </section>
   );
 }
 

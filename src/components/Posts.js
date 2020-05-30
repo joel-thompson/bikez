@@ -17,9 +17,9 @@ function Posts() {
   }, []);
 
   return (
-    <div className="Posts">
+    <section className="Posts section">
       You have this many posts: {posts.length.toString()}
-    </div>
+    </section>
   );
 }
 

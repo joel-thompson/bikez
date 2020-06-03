@@ -3,7 +3,7 @@ import authContext from '../lib/authContext';
 
 function Dashboard() {
   return (
-    <div className="Dashboard centered">
+    <section className="Dashboard section centered">
       <h1>Dashboard</h1>
       <authContext.Consumer>
         {({ user, loggedInStatus }) => {
@@ -15,7 +15,7 @@ function Dashboard() {
           );
         }}
       </authContext.Consumer>
-    </div>
+    </section>
   );
 }
 

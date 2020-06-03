@@ -66,43 +66,61 @@ function Registration(props) {
               </div>
             )}
             <form onSubmit={handleSubmit}>
-              <input
-                className="input"
-                type="email"
-                placeholder="Email"
-                required
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
+              <div className="field">
+                <div className="field">
+                  <input
+                    className="input"
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </div>
+              </div>
 
-              <input
-                className="input"
-                type="password"
-                placeholder="Password"
-                required
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              <div className="field">
+                <div className="field">
+                  <input
+                    className="input"
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={password}
+                    onChange={(event) =>
+                      setPassword(event.target.value)
+                    }
+                  />
+                </div>
+              </div>
 
-              <input
-                className="input"
-                type="password"
-                placeholder="Password Confirmation"
-                required
-                value={passwordConfirmation}
-                onChange={(event) =>
-                  setPasswordConfirmation(event.target.value)
-                }
-              />
+              <div className="field">
+                <div className="field">
+                  <input
+                    className="input"
+                    type="password"
+                    placeholder="Password Confirmation"
+                    required
+                    value={passwordConfirmation}
+                    onChange={(event) =>
+                      setPasswordConfirmation(event.target.value)
+                    }
+                  />
+                </div>
+              </div>
 
-              <button
-                className={`button is-link ${
-                  loading ? 'is-loading' : ''
-                }`}
-                type="submit"
-              >
-                Register
-              </button>
+              <div className="field">
+                <div className="field">
+                  <button
+                    className={`button is-link ${
+                      loading ? 'is-loading' : ''
+                    }`}
+                    type="submit"
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
         );

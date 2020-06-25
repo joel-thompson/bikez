@@ -1,19 +1,13 @@
 import React, { useLayoutEffect, useState } from 'react';
-import axios from 'axios';
-import apiUrl from '../lib/apiUrl';
+import { apiIndex } from '../lib/requests';
 
 function Posts() {
   const [posts, setPosts] = useState([]);
 
   useLayoutEffect(() => {
-    axios
-      .get(apiUrl('/api/v1/posts'), { withCredentials: true })
-      .then((response) => {
-        setPosts(response.data);
-      })
-      .catch((error) => {
-        console.log('check login error', error);
-      });
+    apiIndex('posts', (data) => {
+      setPosts(data);
+    });
   }, []);
 
   return (

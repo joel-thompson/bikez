@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { apiIndex, apiShow } from '../lib/requests';
+import { apiIndex } from '../lib/requests';
 
 function Posts() {
   const [posts, setPosts] = useState([]);
